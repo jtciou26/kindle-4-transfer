@@ -1,0 +1,5 @@
+config.json
+*.mobi
+*.epub
+__pycache__/
+*.py[cod]
