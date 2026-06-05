@@ -10,7 +10,6 @@ Uses a Cloudflare tunnel to bypass the Kindle 4's inability to reach local netwo
 |---|---|
 | `convert.py` | Batch convert EPUB → MOBI using Calibre |
 | `serve.py` | Serve books wirelessly via Cloudflare tunnel |
-| `send.py` | Email files to newer Kindles via Gmail (Send-to-Kindle) |
 
 ## Prerequisites
 
@@ -83,13 +82,6 @@ python serve.py books                        # local only (no tunnel)
 python serve.py books --port 9090            # custom port
 ```
 
-### Email (newer Kindles only)
-
-```powershell
-python send.py --setup                       # one-time config
-python send.py books/*.mobi                  # send
-```
-
 ## How it works
 
 The Kindle 4's browser can reach the public internet but not local network IPs. `serve.py --tunnel` starts a Cloudflare tunnel that exposes your local server at a public URL:
@@ -104,11 +96,4 @@ The tunnel URL is temporary and changes each restart. The Cloudflare Worker acts
 ## Notes
 
 - `convert.py` runs 4 parallel conversions by default (`-j` to change).
-- `config.json` stores credentials for `send.py` and `serve.py --cf-setup` (auto-created, owner-only permissions).
-
-## .gitignore
-
-```
-config.json
-*.mobi
-```
+- `config.json` stores Cloudflare credentials from `serve.py --cf-setup` (auto-created, gitignored, owner-only permissions).
